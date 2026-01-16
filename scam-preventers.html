@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="favicon" rel="icon" type="image/png" href="https://cataredogs.neocities.org/img-files/shield.svg">
+
+    <title>Scam Preventers</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #1E90FF;
+        }
+
+        p.note {
+            font-size: 0.9rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #ccc;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* change the 1 in ("1", 1fr) to a 3 when you dont need to center blocks */
+            gap: 20px;
+        }
+
+        .grid a {
+            position: relative;
+            /* Needed for tooltip positioning */
+            text-decoration: none;
+            color: white;
+            border: 2px solid white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            transition: background 0.3s, color 0.3s;
+            display: block;
+            font-weight: bold;
+        }
+
+        .grid a:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .tooltip {
+            background-color: white;
+            color: black;
+            text-align: left;
+            border-radius: 5px;
+            padding: 8px 10px;
+            position: absolute;
+            top: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            pointer-events: none;
+            max-width: 400px;
+            min-width: 200px;
+            white-space: normal;
+            line-height: 1.4;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+            z-index: 1000;
+        }
+
+        .grid a:hover .tooltip {
+            opacity: 1;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 10px 0;
+            color: #888;
+            font-size: 0.85rem;
+        }
+         #request-popup {
+            display: none;
+            position: fixed;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            border: 2px solid #fff;
+            border-radius: 12px;
+        }
+
+        #request-popup-content {
+            background: black;
+            padding: 20px;
+            border-radius: 12px;
+            width: 320px;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="text"] {
+            color: black;
+            width: 90%;
+            padding: 8px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .Submitbtn {
+            margin-top: 12px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #4CAF50;
+            color: white;
+        }
+
+        .Submitbtn.secondary {
+            background: #f44336;
+            margin-left: 8px;
+        }
+
+        #request-message {
+            margin-top: 10px;
+            color: green;
+            font-weight: bold;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #1E90FF;
+        }
+
+        #request-popup-content p {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>SITES THAT HELP WITH SCAMS</h1>
+        <p class="note">
+            None of the websites provided here is owned by me or in any way affliated with me. <br>
+            Please note that these websites below may not be 100% accurate and may result in false information. <br>
+        </p>
+    </header>
+
+    <div class="grid">
+        <a href="https://www.haveibeenpwned.com/" target="_blank">
+            Have I been Pwned
+            <span class="tooltip">Check if your email has been exposed in a data breach.</span>
+        </a>
+        <a href="https://www.scamadviser.com/" target="_blank">
+            Scam Advisor
+            <span class="tooltip">Check if the website you are visiting is a scam.</span>
+        </a>
+        <a href="https://www.fdic.gov/consumer-resource-center/2021-10/avoiding-scams-and-scammers" target="_blank">
+            FDIC Avoding Scams and Scammers
+            <span class="tooltip">Tips for how to avoid falling for scams and scammers.</span>
+        </a>
+    </div>
+
+    <p>
+        <a href="https://cataredogs.neocities.org" style="color: #1E90FF; font-weight: bold; text-decoration: underline; font-size: 0.8rem; margin-left: 7px">
+            BACK TO HOMEPAGE
+        </a>
+        <button onclick="OpenRequestPopup()" style="color: #1E90FF; font-weight: bold; text-decoration: underline; font-size: 0.8rem; margin-left: 7px; background-color: transparent; border: none; cursor: pointer;"> REQUEST A WEBSITE
+        </button>
+    </p>
+    <div id="request-popup">
+        <div id="request-popup-content">
+            <h3>Request a Website</h3>
+            <p>Type in the website you want added to the Scam Preventers list:</p>
+            <input type="text" id="websiteInput" placeholder="example.com">
+            <br><br>
+            <button class="Submitbtn" onclick="submitRequest()">Submit</button>
+            <button class="Submitbtn secondary" onclick="CloseRequestPopup()">Cancel</button>
+            <div id="request-message"></div>
+        </div>
+    </div>
+
+    <script>
+        const WORKER_URL = "https://requests.jakeyisaboi.workers.dev/";
+
+        function OpenRequestPopup() {
+            document.getElementById('request-popup').style.display = 'flex';
+            document.getElementById('request-message').textContent = '';
+            document.getElementById('websiteInput').value = '';
+        }
+
+        function CloseRequestPopup() {
+            document.getElementById('request-popup').style.display = 'none';
+        }
+
+        function submitRequest() {
+            const site = document.getElementById("websiteInput").value.trim();
+            if (!site) return alert("Please type a website!");
+
+            const img = document.createElement("img");
+            img.src = WORKER_URL + "?website=" + encodeURIComponent(site);
+            img.style.display = "none";
+            document.body.appendChild(img);
+
+            document.getElementById("request-message").textContent = "✅ Request submitted!";
+            document.getElementById("websiteInput").value = '';
+        }
+        
+        window.onload = function() {
+            document.getElementById("request-popup").style.display = "none";
+        }
+    </script>
+
+</body>
+
+</html>
