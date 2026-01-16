@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="favicon" rel="icon" type="image/png" href="https://cataredogs.neocities.org/img-files/shield.svg">
+    <title>Fake Scam Websites</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #1E90FF;
+        }
+
+        p.note {
+            font-size: 0.9rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #ccc;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .grid a {
+            text-decoration: none;
+            color: white;
+            border: 2px solid white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            transition: background 0.3s, color 0.3s;
+            display: block;
+            font-weight: bold;
+        }
+
+        .grid a:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .adv-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .adv-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        .info-icon {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            border: 2px solid currentColor;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .info-tooltip {
+            visibility: hidden;
+            background-color: white;
+            color: black;
+            text-align: left;
+            border-radius: 5px;
+            padding: 8px 10px;
+            position: absolute;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            z-index: 1001;
+            pointer-events: none;
+            max-width: 400px;
+            min-width: 400px;
+            white-space: normal;
+            line-height: 1.4;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-icon:hover .info-tooltip {
+            visibility: visible;
+        }
+
+        .info-tooltip::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent white transparent;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 10px 0;
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .popup-box {
+            background-color: #111;
+            border: 2px solid white;
+            border-radius: 15px;
+            width: 500px;
+            max-width: 90%;
+            padding: 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .popup-text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            flex: 1;
+        }
+
+        .popup-title {
+            color: #1E90FF;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .popup-message {
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .popup-message b {
+            color: red;
+        }
+
+        .popup-button {
+            margin-top: 20px;
+            padding: 10px 25px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .popup-button:hover {
+            background: white;
+            color: black;
+        }
+
+        .popup-image {
+            width: 60px;
+            height: 60px;
+        }
+
+        .Test-page {
+            position: fixed;
+            top: 10px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            text-decoration: none;
+            display: none;
+        }
+
+        .Test-page:hover {
+            background: white;
+            color: black;
+        }
+
+        @media (max-width: 600px) {
+            .popup-box {
+                flex-direction: column;
+            }
+
+            .popup-image {
+                margin-top: 15px;
+            }
+        }
+
+        #request-popup {
+            display: none;
+            position: fixed;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            border-radius: 12px;
+        }
+
+        #request-popup-content {
+            background: black;
+            padding: 20px;
+            border-radius: 12px;
+            width: 320px;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="text"] {
+            color: black;
+            width: 90%;
+            padding: 8px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .Submitbtn {
+            margin-top: 12px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #4CAF50;
+            color: white;
+        }
+
+        .Submitbtn.secondary {
+            background: #f44336;
+            margin-left: 8px;
+        }
+
+        #request-message {
+            margin-top: 10px;
+            color: green;
+            font-weight: bold;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #1E90FF;
+        }
+
+        #request-popup-content p {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="popup-overlay" id="mobileNotice">
+        <div class="popup-box">
+            <div class="popup-text-container">
+                <div class="popup-title">NOTICE</div>
+                <div class="popup-message">
+                    This website is <b>NOT</b> mobile friendly, please use a computer for a better experience.
+                </div>
+                <button class="popup-button" id="closePopup">Okay</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="advancedToggle" class="adv-btn">
+        <div class="info-icon">
+            i
+            <span class="info-tooltip">
+                Turning advanced mode on means that when downloading stuff it will result in downloading whatever file extension the scam site uses instead of the default txt file.
+                So for example, if downloading a fake update, instead of downloading a txt file it will download an exe file.
+                Note that the files won't give you any malware no matter what and will just do the same thing as a text file but cooler. This also opens up some extra features all around the website.
+            </span>
+        </div>
+        <span class="button-text">Enable Advanced Mode</span>
+    </button>
+
+    <a href="https://cataredogs.neocities.org/test" target="_blank" class="Test-page">
+        Test Website
+    </a>
+
+
+    <header>
+        <h1>DEMO URLS: FAKE URLS FOR SCAM AWARENESS</h1>
+        <p class="note">
+            Everything in this website is for scam awareness and nothing actually gives you malware.
+            This website is just meant to show you how these types of scams work.
+        </p>
+    </header>
+
+    <div class="grid">
+        <a href="https://cataredogs.neocities.org/actual_website/cloudflare-captcha" target="_blank">Fake Cloudflare Captcha Scam</a>
+        <a href="https://cataredogs.neocities.org/actual_website/steamcommunity-login" target="_blank">Fake Steam Login Scam</a>
+        <a href="https://cataredogs.neocities.org/actual_website/chrome-update" target="_blank">Fake Chrome Update Scam</a>
+        <a href="https://cataredogs.neocities.org/actual_website/amazon-addcard" target="_blank">Fake Amazon Credit Card Scam</a>
+        <a href="https://cataredogs.neocities.org/actual_website/DHL-login" target="_blank">Fake DHL Track Package Scam</a>
+        <a href="https://cataredogs.neocities.org/actual_website/Chrome-extension" target="_blank">Fake Chrome Extension Scam</a>
+        <a href="https://cataredogs.neocities.org/actual_website/Windows-Defender-Popup" target="_blank">Fake Windows Defender Virus Alert Scam</a>
+        <a href="https://cataredogs.neocities.org/actual_website/Free-robux" target="_blank">Fake Free Robux Giver Scam</a>
+        <a href="https://cataredogs.neocities.org/actual_website/free-giftcard" target="_blank">Fake Free Amazon Gifcard Scam</a>
+        <a href="https://cataredogs.neocities.org/actual_website/DMV-penalties" target="_blank">Fake DMV Penalties Scam</a>
+        <a href="https://cataredogs.neocities.org/actual_website/Iphone-trojanfound-call" target="_blank">Fake Iphone Scam Call</a>
+        <a href="https://cataredogs.neocities.org/actual_website/Paste-Console" target="_blank">Fake Console Pasting Scam Call</a>
+        <a style="display: block; text-align: center; grid-column: 1 / -1;">
+            MORE TO COME SOON! <br>
+            <span style="color: #888; font-size: 0.85rem;">You can request websites to put in here in the meantime ;)</span>
+        </a>
+    </div>
+
+    <footer>
+        <p>
+            <button onclick="OpenRequestPopup()" style="color: #1E90FF; font-weight: bold; text-decoration: underline; font-size: 0.8rem; margin-left: 7px; background-color: transparent; border: none; cursor: pointer;"> REQUEST A WEBSITE
+            </button>
+            <a href="https://cataredogs.neocities.org/about-me" target="_blank" style="color: #1E90FF; font-weight: bold; text-decoration: underline; font-size: 0.8rem; margin-left: 7px">
+                ABOUT ME
+            </a>
+            <a href="https://cataredogs.neocities.org/scam-preventers" target="_blank" style="color: #1E90FF; font-weight: bold; text-decoration: underline; font-size: 0.8rem; margin-left: 20px">
+                SCAM PREVENTERS
+            </a>
+        </p>
+    </footer>
+
+    <!-- Page load tracking -->
+    <img src="https://raspy-moon-6f65.jakeyisaboi.workers.dev" style="display:none;">
+
+
+    <div class="popup-overlay" id="request-popup">
+        <div id="request-popup-content" style="border: 2px solid white;">
+            <h3>Request a Website</h3>
+            <p>Type in the website you want added to the Scam Preventers list:</p>
+            <input type="text" id="websiteInput" placeholder="example.com">
+            <br><br>
+            <button class="Submitbtn" onclick="submitRequest()">Submit</button>
+            <button class="Submitbtn secondary" onclick="CloseRequestPopup()">Cancel</button>
+            <div id="request-message"></div>
+        </div>
+    </div>
+    <script>
+        let advancedMode = localStorage.getItem("advancedMode") === "true";
+        const toggleBtn = document.getElementById("advancedToggle");
+        const buttonText = document.querySelector(".button-text");
+
+        function updateButton() {
+            buttonText.textContent = advancedMode ? "Disable Advanced Mode" : "Enable Advanced Mode";
+        }
+
+        updateButton();
+
+        toggleBtn.addEventListener("click", () => {
+            advancedMode = !advancedMode;
+            localStorage.setItem("advancedMode", advancedMode);
+            updateButton();
+
+            if (advancedMode) {
+                document.querySelector(".Test-page").style.display = "block";
+            } else {
+                document.querySelector(".Test-page").style.display = "none";
+            }
+        });
+
+        if (localStorage.getItem("advancedMode") === "true") {
+            document.querySelector(".Test-page").style.display = "block";
+        }
+
+        const popup = document.getElementById("mobileNotice");
+        const closePopupBtn = document.getElementById("closePopup");
+
+        window.addEventListener("load", () => {
+            if (!localStorage.getItem("mobileNoticeClosed")) {
+                popup.style.display = "flex";
+            }
+        });
+
+        closePopupBtn.addEventListener("click", () => {
+            popup.style.display = "none";
+            localStorage.setItem("mobileNoticeClosed", "true");
+        });
+    </script>
+    <script>
+        const WORKER_URL = "https://scamwebsites-requests.jakeyisaboi.workers.dev/";
+
+        function OpenRequestPopup() {
+            document.getElementById('request-popup').style.display = 'flex';
+            document.getElementById('request-message').textContent = '';
+            document.getElementById('websiteInput').value = '';
+            document.getElementById('requestOverlay').style.display = 'flex';
+
+        }
+
+        function CloseRequestPopup() {
+            document.getElementById('request-popup').style.display = 'none';
+        }
+
+        function submitRequest() {
+            const site = document.getElementById("websiteInput").value.trim();
+            if (!site) return alert("Please type a website!");
+
+            const img = document.createElement("img");
+            img.src = WORKER_URL + "?website=" + encodeURIComponent(site);
+            img.style.display = "none";
+            document.body.appendChild(img);
+
+            document.getElementById("request-message").textContent = "✅ Request submitted!";
+            document.getElementById("websiteInput").value = '';
+        }
+
+        window.onload = function() {
+            document.getElementById("request-popup").style.display = "none";
+        }
+    </script>
+
+</body>
+
+</html>
