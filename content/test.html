@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="favicon" rel="icon" type="image/png" href="https://cataredogs.neocities.org/img-files/shield.svg">
+
+    <title>Test Website</title>
+</head>
+
+<body>
+    <div id="wow">
+        <style>
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+            }
+            
+            a {
+              text-align: center;
+
+            }
+            #wow {
+                padding: 20px;
+                text-align: center;
+                /* Make things disappear    display: none; */
+            }
+        </style>
+
+        <h1>Welcome to My Test Website</h1>
+        <p>
+            This is just a test page I use to test things before I actually put them
+            in my website, so if you go to this page at the right time you might see
+            some early access stuff ;)
+        </p>
+        
+        <a href="https://cataredogs.neocities.org"> Go Back </a>
+    </div>
+    
+<!-- check for dark or light mode -->    
+  <script>
+    if (!window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      document.getElementById("favicon").href = "https://cataredogs.neocities.org/img-files/shield.svg";
+    }
+  </script>
+</body>
+</html>
+
